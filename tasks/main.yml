@@ -1,0 +1,39 @@
+---
+- name: Install EPEL repo
+  yum:
+    name: epel-release
+
+- name: Install packages
+  yum:
+    name:
+      - python3-flask
+      - cowsay
+
+# Fix for CentOS7 incompatibility
+#- name: Link to flask-3
+#  file:
+#    src: /usr/bin/flask-3
+#    dest: /usr/bin/flask
+#    state: link
+#  when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "7"
+
+- name: Make directory for flask application
+  file:
+    path: /opt/bin
+    state: directory
+
+- name: Copy cowsay flask application
+  copy:
+    src: cowsay.py
+    dest: /opt/bin/
+
+- name: Install service module for flask application
+  template:
+    src: cowsay.service
+    dest: /usr/lib/systemd/system/
+
+- name: Start and enable the service
+  service:
+    name: cowsay
+    state: started
+    enabled: yes

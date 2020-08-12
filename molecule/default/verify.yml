@@ -1,0 +1,13 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+  - name: Call the service
+    uri:
+      url: http://localhost:5000/test
+    register: result
+    ignore_errors: yes
+
+  - name: Check that the service returns status 200
+    assert:
+      that: '{{ result.status == 200 }}'

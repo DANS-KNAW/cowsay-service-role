@@ -1,0 +1,3 @@
+---
+cowsay_service:
+  port: 5000

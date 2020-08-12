@@ -1,0 +1,9 @@
+[Unit]
+Description=Cowsay service
+
+[Service]
+ExecStart=/usr/bin/flask run -p {{ cowsay_service.port }}
+Environment=FLASK_APP=/opt/bin/cowsay.py
+
+[Install]
+WantedBy=multi-user.target
