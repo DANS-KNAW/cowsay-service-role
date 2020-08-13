@@ -1,6 +1,6 @@
-Role Name
-=========
-Installs the Cowsay HTTP service.
+cowsay-service-role
+===================
+Installs the Cowsay HTTP service. A toy example of an external Ansible role.
 
 Requirements
 ------------
@@ -9,24 +9,23 @@ None
 Role Variables
 --------------
 
+    cowsay_service:
+        port: 5000 # Listen port for service
 
 Dependencies
 ------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Noe
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
+    - hosts: all
+      become: yes
       roles:
-         - { role: username.rolename, x: 42 }
+         - role: cowsay-service-role
+           cowsay_service:
+                port: 5001
 
 License
 -------
 Apache 2.0
-
-Author Information
-------------------
